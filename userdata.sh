@@ -6,6 +6,12 @@ yum install -y java \
 	awscli \
 	wget 
 
+dd if=/dev/zero of=/swapfile bs=2048 count=1048576
+chmod 600 /swapfile
+mkswap /swapfile
+echo "/swapfile swap swap defaults 0 0" >>/etc/fstab
+swapon /swapfile
+
 groupadd -g 1050 docker  
 usermod -aG docker centos 
 curl -fsSL https://get.docker.com | bash 
